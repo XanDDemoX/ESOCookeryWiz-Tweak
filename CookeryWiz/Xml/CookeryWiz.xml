@@ -30,121 +30,121 @@
       </Controls>
     </Control>
   
-  		<Control name="RecipeRowTemplate" mouseEnabled="true" tier="MEDIUM" layer="CONTROLS" virtual="true">
-			<Dimensions y="24" />
-          <OnMouseEnter>
-            CookeryWiz:ShowItemToolTip(self, true)
-            CookeryWiz:SetHighlight(self, true)
-          </OnMouseEnter>
-          <OnMouseExit>
-            CookeryWiz:ShowItemToolTip(self, false)
-            CookeryWiz:SetHighlight(self, false)
-          </OnMouseExit> 
-			<Controls>
-				<Texture name="$(parent)Bg" textureFile="EsoUI/Art/Miscellaneous/listItem_backdrop.dds">
-					<AnchorFill />
-					<TextureCoords left="0" right="1" top="0" bottom=".8125" />
-				</Texture>
+	<Control name="RecipeRowTemplate" mouseEnabled="true" tier="MEDIUM" layer="CONTROLS" virtual="true">
+		<Dimensions y="24" />
+	  <OnMouseEnter>
+		CookeryWiz:ShowItemToolTip(self, true)
+		CookeryWiz:SetHighlight(self, true)
+	  </OnMouseEnter>
+	  <OnMouseExit>
+		CookeryWiz:ShowItemToolTip(self, false)
+		CookeryWiz:SetHighlight(self, false)
+	  </OnMouseExit> 
+		<Controls>
+			<Texture name="$(parent)Bg" textureFile="EsoUI/Art/Miscellaneous/listItem_backdrop.dds">
+				<AnchorFill />
+				<TextureCoords left="0" right="1" top="0" bottom=".8125" />
+			</Texture>
 
-				<Texture name="$(parent)Highlight" hidden="true" textureFile="EsoUI/Art/Miscellaneous/listItem_highlight.dds" alpha="0.5">
-					<AnchorFill />
-					<TextureCoords left="0" right="1" top="0" bottom=".625" />
-				</Texture>
+			<Texture name="$(parent)Highlight" hidden="true" textureFile="EsoUI/Art/Miscellaneous/listItem_highlight.dds" alpha="0.5">
+				<AnchorFill />
+				<TextureCoords left="0" right="1" top="0" bottom=".625" />
+			</Texture>
 
-        <Control name="$(parent)Tick">
-          <Anchor point="LEFT" relativeTo="$(parent)" offsetX="10" />
-          <Dimensions x="20" y="20" />
-          <Controls>
-            <Texture name="$(parent)TickTexture" textureFile="/esoui/art/cadwell/check.dds">
-              <AnchorFill />
-            </Texture>
-          </Controls>       
-        </Control>
-        
-        <Button name="$(parent)ExpandButton">
-          <Anchor point="LEFT" relativeTo="$(parent)" offsetX="10" />
-          <Dimensions x="30" y="30" />
-          <OnInitialized>
-            CookeryWiz:OnExpandButtonInitialized(self) 
-          </OnInitialized>
-          <Controls>          
-          <!--
-            <Texture name="$(parent)TextureExpand" textureFile="/esoui/art/buttons/plus_up.dds">
-              <AnchorFill />
-            </Texture>
-            -->
-          </Controls>
-          <Textures scale="1" normal="/esoui/art/buttons/plus_up.dds" pressed="/esoui/art/buttons/plus_down.dds"
-            mouseOver="/esoui/art/buttons/plus_over.dds" />
-        </Button> 
-        
-        <Button name="$(parent)CollapseButton">
-          <Anchor point="LEFT" relativeTo="$(parent)" offsetX="10" />
-          <Dimensions x="30" y="30" />
-          <OnInitialized>
-            CookeryWiz:OnExpandButtonInitialized(self) 
-          </OnInitialized>
-          <Controls>          
-          <!--
-            <Texture name="$(parent)TextureExpand" textureFile="/esoui/art/buttons/plus_up.dds">
-              <AnchorFill />
-            </Texture>
-            -->
-          </Controls>
-          <!--
-          <Textures name="$(parent)Plus" scale="1" normal="/esoui/art/buttons/plus_up.dds" pressed="/esoui/art/buttons/plus_down.dds"
-            mouseOver="/esoui/art/buttons/plus_over.dds" />
-            -->
-          <Textures scale="1" normal="/esoui/art/buttons/minus_up.dds" pressed="/esoui/art/buttons/minus_down.dds"
-            mouseOver="/esoui/art/buttons/minus_over.dds" hidden="true"/>            
-        </Button> 
-        
-        <EditBox name="$(parent)EditAmount" inherits="ZO_DefaultEditForBackdrop" alpha="0.9" color="INTERFACE_COLOR_TYPE_TEXT_COLORS:INTERFACE_TEXT_COLOR_SELECTED" maxInputCharacters="3">
-        <Dimensions x="24" y="24" />
-          <OnInitialized>
-            CookeryWiz:OnEditAmountInitialized(self)
-          </OnInitialized>
-          <OnTextChanged>
-            CookeryWiz:OnEditAmountChanged(self)
-          </OnTextChanged>
-          <OnMouseEnter>
-            CookeryWiz:ShowItemToolTip(self:GetParent(), true)
-            CookeryWiz:SetHighlight(self:GetParent(), true)
-          </OnMouseEnter>
-          <OnMouseExit>
-            CookeryWiz:ShowItemToolTip(self:GetParent(), false)
-            CookeryWiz:SetHighlight(self:GetParent(), false)
-          </OnMouseExit>           
-          <Anchor point="LEFT" relativeTo="$(parent)Tick" relativePoint="RIGHT" offsetX="20"/>
-          <Controls>
-            <Texture name="$(parent)EditTexture" color="4A4A4A" alpha="1">
-              <AnchorFill />
-            </Texture>          
-          <!--
-            <Backdrop name="$(parent)EditAmountBackdrop" inherits="ZO_EditBackdrop">
-              <AnchorFill/>
-            </Backdrop>
-            -->
-          </Controls>
-        </EditBox>
-        
-				<Button name="$(parent)Name" font="ZoFontGameShadow" horizontalAlignment="LEFT" mouseEnabled="true" wrapMode="ELLIPSIS" color="INTERFACE_COLOR_TYPE_TEXT_COLORS:INTERFACE_TEXT_COLOR_NORMAL">
-					<Dimensions x="350" y="24" />
-					<Anchor point="LEFT" relativeTo="$(parent)EditAmount" relativePoint="RIGHT" offsetX="10" />
-          <OnClicked>
-            CookeryWiz:OnRecipeClicked(...)
-          </OnClicked>
-          <OnMouseEnter>
-            CookeryWiz:ShowItemToolTip(self:GetParent(), true)
-            CookeryWiz:SetHighlight(self:GetParent(), true)
-          </OnMouseEnter>
-          <OnMouseExit>
-            CookeryWiz:ShowItemToolTip(self:GetParent(), false)
-            CookeryWiz:SetHighlight(self:GetParent(), false)
-          </OnMouseExit>             
-				</Button>      
-			</Controls>
-		</Control>
+	<Control name="$(parent)Tick">
+	  <Anchor point="LEFT" relativeTo="$(parent)" offsetX="10" />
+	  <Dimensions x="20" y="20" />
+	  <Controls>
+		<Texture name="$(parent)TickTexture" textureFile="/esoui/art/cadwell/check.dds">
+		  <AnchorFill />
+		</Texture>
+	  </Controls>       
+	</Control>
+	
+	<Button name="$(parent)ExpandButton">
+	  <Anchor point="LEFT" relativeTo="$(parent)" offsetX="10" />
+	  <Dimensions x="30" y="30" />
+	  <OnInitialized>
+		CookeryWiz:OnExpandButtonInitialized(self) 
+	  </OnInitialized>
+	  <Controls>          
+	  <!--
+		<Texture name="$(parent)TextureExpand" textureFile="/esoui/art/buttons/plus_up.dds">
+		  <AnchorFill />
+		</Texture>
+		-->
+	  </Controls>
+	  <Textures scale="1" normal="/esoui/art/buttons/plus_up.dds" pressed="/esoui/art/buttons/plus_down.dds"
+		mouseOver="/esoui/art/buttons/plus_over.dds" />
+	</Button> 
+	
+	<Button name="$(parent)CollapseButton">
+	  <Anchor point="LEFT" relativeTo="$(parent)" offsetX="10" />
+	  <Dimensions x="30" y="30" />
+	  <OnInitialized>
+		CookeryWiz:OnExpandButtonInitialized(self) 
+	  </OnInitialized>
+	  <Controls>          
+	  <!--
+		<Texture name="$(parent)TextureExpand" textureFile="/esoui/art/buttons/plus_up.dds">
+		  <AnchorFill />
+		</Texture>
+		-->
+	  </Controls>
+	  <!--
+	  <Textures name="$(parent)Plus" scale="1" normal="/esoui/art/buttons/plus_up.dds" pressed="/esoui/art/buttons/plus_down.dds"
+		mouseOver="/esoui/art/buttons/plus_over.dds" />
+		-->
+	  <Textures scale="1" normal="/esoui/art/buttons/minus_up.dds" pressed="/esoui/art/buttons/minus_down.dds"
+		mouseOver="/esoui/art/buttons/minus_over.dds" hidden="true"/>            
+	</Button> 
+	
+	<EditBox name="$(parent)EditAmount" inherits="ZO_DefaultEditForBackdrop" alpha="0.9" color="INTERFACE_COLOR_TYPE_TEXT_COLORS:INTERFACE_TEXT_COLOR_SELECTED" maxInputCharacters="3">
+	<Dimensions x="24" y="24" />
+	  <OnInitialized>
+		CookeryWiz:OnEditAmountInitialized(self)
+	  </OnInitialized>
+	  <OnTextChanged>
+		CookeryWiz:OnEditAmountChanged(self)
+	  </OnTextChanged>
+	  <OnMouseEnter>
+		CookeryWiz:ShowItemToolTip(self:GetParent(), true)
+		CookeryWiz:SetHighlight(self:GetParent(), true)
+	  </OnMouseEnter>
+	  <OnMouseExit>
+		CookeryWiz:ShowItemToolTip(self:GetParent(), false)
+		CookeryWiz:SetHighlight(self:GetParent(), false)
+	  </OnMouseExit>           
+	  <Anchor point="LEFT" relativeTo="$(parent)Tick" relativePoint="RIGHT" offsetX="20"/>
+	  <Controls>
+		<Texture name="$(parent)EditTexture" color="4A4A4A" alpha="1">
+		  <AnchorFill />
+		</Texture>          
+	  <!--
+		<Backdrop name="$(parent)EditAmountBackdrop" inherits="ZO_EditBackdrop">
+		  <AnchorFill/>
+		</Backdrop>
+		-->
+	  </Controls>
+	</EditBox>
+	
+			<Button name="$(parent)Name" font="ZoFontGameShadow" horizontalAlignment="LEFT" mouseEnabled="true" wrapMode="ELLIPSIS" color="INTERFACE_COLOR_TYPE_TEXT_COLORS:INTERFACE_TEXT_COLOR_NORMAL">
+				<Dimensions x="350" y="24" />
+				<Anchor point="LEFT" relativeTo="$(parent)EditAmount" relativePoint="RIGHT" offsetX="10" />
+	  <OnClicked>
+		CookeryWiz:OnRecipeClicked(...)
+	  </OnClicked>
+	  <OnMouseEnter>
+		CookeryWiz:ShowItemToolTip(self:GetParent(), true)
+		CookeryWiz:SetHighlight(self:GetParent(), true)
+	  </OnMouseEnter>
+	  <OnMouseExit>
+		CookeryWiz:ShowItemToolTip(self:GetParent(), false)
+		CookeryWiz:SetHighlight(self:GetParent(), false)
+	  </OnMouseExit>             
+			</Button>      
+		</Controls>
+	</Control>
 
 
     <TopLevelControl name="CookeryWizUI" tier="MEDIUM" inherits="EasyFrameUI">
@@ -265,143 +265,163 @@
               </Texture>
             </Controls>           
           </Control>
+		  
+          <Control name="$(parent)SearchContent">
+			<Dimensions y="25" />
+		    <Anchor point="BOTTOMLEFT" relativeTo="$(parent)Content" relativePoint="BOTTOMLEFT" offsetX="0" offsetY="0"/>
           
-          <EditBox name="$(parent)EditSearch" inherits="ZO_DefaultEditForBackdrop" color="INTERFACE_COLOR_TYPE_TEXT_COLORS:INTERFACE_TEXT_COLOR_SELECTED">
-          <Dimensions x="120" y="24" />
-            <OnInitialized>
-            CookeryWiz:OnEditSearchInitialized(self)
+		    <OnInitialized>
+              CookeryWiz:OnSearchContentInitialized(self)
             </OnInitialized>
-            <OnFocusGained>
-            CookeryWiz:OnEditSearchFocusGained(self)
-            </OnFocusGained> 
-            <OnFocusLost>
-            CookeryWiz:OnEditSearchFocusLost(self)
-            </OnFocusLost>             
-            <OnTextChanged>
-            CookeryWiz:OnEditSearchChanged(self)
-            </OnTextChanged>
-            <Anchor point="BOTTOMLEFT" relativeTo="$(parent)Content" relativePoint="BOTTOMLEFT" offsetX="4" offsetY="-1"/>
-            <Controls>
-              <Backdrop name="$(parent)EditAmountBackdrop" inherits="ZO_EditBackdrop">
-                <AnchorFill/>
-              </Backdrop>
-            </Controls>
-          </EditBox>
-          
-          <Button name="$(parent)SearchClearButton" >
-            <Anchor point="TOPLEFT" relativeTo="$(parent)EditSearch" relativePoint="TOPRIGHT" offsetX="5" offsetY="2"  />
-            <OnInitialized>
-              CookeryWiz:OnSearchClearButtonInitialized(self)
-            </OnInitialized>
-            <OnClicked>
-              CookeryWiz:OnSearchClearButtonClicked(self) 
-            </OnClicked>                    
-            <Dimensions x="20" y="20" />
-            <Textures normal="EsoUI/Art/Buttons/cancel_up.dds" pressed="EsoUI/Art/Buttons/cancel_down.dds"
-              mouseOver="EsoUI/Art/Buttons/cancel_over.dds" />
-          </Button>
-          
-          <Control name="$(parent)FilterCombo" inherits="ZO_ComboBox">
-          <Dimensions x="130" y="25" />
-            <Anchor point="TOPLEFT" relativeTo="$(parent)EditSearch" relativePoint="TOPRIGHT" offsetX="40" offsetY="0" />
-            <!--
-            <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)QualityDownButton" relativePoint="BOTTOMLEFT" offsetX="-40" offsetY="0"/>
-            -->
-            <OnInitialized>
-              CookeryWiz:OnFilterComboInitialized(self)
-            </OnInitialized> 
-          </Control>
-            
-          <Button name="$(parent)QualityDownButton">
-            <Dimensions x="25" y="25" />
-            <Anchor point="TOPLEFT" relativeTo="$(parent)FilterCombo" relativePoint="TOPRIGHT" offsetX="95" offsetY="-2" />
-            <OnInitialized>
-              CookeryWizQualitySelector:OnQualityDownButtonInitialized(self)
-            </OnInitialized>
-            <OnClicked>
-              CookeryWizQualitySelector:OnQualityDownButtonClicked(self) 
-            </OnClicked>             
-            <Textures normal="EsoUI/Art/ChatWindow/chat_scrollbar_downArrow_up.dds" pressed="EsoUI/Art/ChatWindow/chat_scrollbar_downArrow_down.dds" mouseOver="EsoUI/Art/ChatWindow/chat_scrollbar_downArrow_over.dds"/>            
-            <Controls><!--
-              <Texture name="$(parent)Texture" textureFile="EsoUI\\Art\\Miscellaneous\\list_sortdown.dds">
-                <AnchorFill />
-              </Texture>  
-              -->
-            </Controls>
-          </Button>   
-          
-          <Backdrop name="$(parent)OutputBackDrop" inherits="ZO_DefaultBackdrop">
-            <!--<Dimensions x="82" y="30" />   -->
-            <Anchor point="TOPLEFT" relativeTo="$(parent)FilterCombo" relativePoint="TOPRIGHT" offsetY="-1" offsetX="14"/>
-            <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)FilterCombo" relativePoint="BOTTOMRIGHT" offsetY="3" offsetX="94"/>
-            <Controls>
-              <Button name="$(parent)SelectedQuality" inherits="QualityRowTemplate" >
-              <Anchor point="TOPLEFT" relativeTo="$(parent)OutputBackDrop" relativePoint="TOPLEFT" offsetY="0" offsetX="0"/>
-              <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)OutputBackDrop" relativePoint="BOTTOMRIGHT" offsetY="0" offsetX="-2"/>              
-              <OnInitialized>
-                CookeryWizQualitySelector:OnSelectedQualityButtonInitialized(self)
-              </OnInitialized>
-              <OnMouseEnter>
-                --d("MouseEnter")
-                CookeryWizQualitySelector:ShowQualityToolTip(self, true)
-              </OnMouseEnter>              
-              <OnClicked>
-                --d("OnClicked")
-              </OnClicked>  
-              </Button>
-            </Controls>
-          </Backdrop>  
-          
-          <Control name="$(parent)FilterLevel" inherits="ZO_ComboBox">
-          <Dimensions x="75" y="25" />
-            <Anchor point="TOPLEFT" relativeTo="$(parent)QualityDownButton" relativePoint="TOPRIGHT" offsetX="8" offsetY="0" />
-            <!--
-            <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)QualityDownButton" relativePoint="BOTTOMLEFT" offsetX="-40" offsetY="0"/>
-            -->
-            <OnInitialized>
-              CookeryWiz:OnFilterLevelComboInitialized(self)
-            </OnInitialized> 
-          </Control>
-          
-          <Button name="$(parent)ClearOrdersButton" inheritAlpha="false" text="Clear Orders" inherits="ZO_DefaultButton">
-            <Dimensions x="130" y="25" />
-            <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)Content" relativePoint="BOTTOMRIGHT" offsetX="0" offsetY="-4"/>
-            <OnClicked>
-              CookeryWiz:OnClearOrdersButtonClicked(self)
-            </OnClicked>                 
-              
-            <OnInitialized>
-              CookeryWiz:OnClearOrdersButtonInitialized(self)
-            </OnInitialized>          
-          </Button>   
-          
-          
-          
-          <Button name="$(parent)CookButton" inheritAlpha="false" text="Cook" inherits="ZO_DefaultButton" enabled="false">
-            <Dimensions x="130" y="25" />
-            <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)Content" relativePoint="BOTTOMRIGHT" offsetX="-113" offsetY="-4" />
-            <OnClicked>
-              CookeryWiz:OnCookButtonClicked(self)
-            </OnClicked>                 
-              
-            <OnInitialized>
-              CookeryWiz:OnCookButtonInitialized(self)
-            </OnInitialized>          
-          </Button>
-         
+		  <Controls>
 
-          <!--
-          <Control name="$(parent)QualityCombo" inherits="ZO_ComboBox">
-            <Anchor point="TOPLEFT" relativeTo="$(parent)FilterCombo" relativePoint="TOPRIGHT" offsetX="5" offsetY="0"/>
-            <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)FilterCombo" relativePoint="BOTTOMRIGHT" />               
-            <OnInitialized>
-              CookeryWiz:OnQualityComboInitialized(self)
-            </OnInitialized> 
-          </Control>
-          -->
-        </Controls>
-      </Control>
-     
+			  <EditBox name="$(parent)EditSearch" inherits="ZO_DefaultEditForBackdrop" color="INTERFACE_COLOR_TYPE_TEXT_COLORS:INTERFACE_TEXT_COLOR_SELECTED">
+			  <Dimensions x="120" y="24" />
+				<OnInitialized>
+				CookeryWiz:OnEditSearchInitialized(self)
+				</OnInitialized>
+				<OnFocusGained>
+				CookeryWiz:OnEditSearchFocusGained(self)
+				</OnFocusGained> 
+				<OnFocusLost>
+				CookeryWiz:OnEditSearchFocusLost(self)
+				</OnFocusLost>             
+				<OnTextChanged>
+				CookeryWiz:OnEditSearchChanged(self)
+				</OnTextChanged>
+				<Anchor point="BOTTOMLEFT" relativeTo="$(parent)SearchContent" relativePoint="BOTTOMLEFT" offsetX="4" offsetY="-1"/>
+				<Controls>
+				  <Backdrop name="$(parent)EditAmountBackdrop" inherits="ZO_EditBackdrop">
+					<AnchorFill/>
+				  </Backdrop>
+				</Controls>
+			  </EditBox>
+			  
+			  <Button name="$(parent)SearchClearButton" >
+				<Anchor point="TOPLEFT" relativeTo="$(parent)EditSearch" relativePoint="TOPRIGHT" offsetX="5" offsetY="2"  />
+				<OnInitialized>
+				  CookeryWiz:OnSearchClearButtonInitialized(self)
+				</OnInitialized>
+				<OnClicked>
+				  CookeryWiz:OnSearchClearButtonClicked(self) 
+				</OnClicked>                    
+				<Dimensions x="20" y="20" />
+				<Textures normal="EsoUI/Art/Buttons/cancel_up.dds" pressed="EsoUI/Art/Buttons/cancel_down.dds"
+				  mouseOver="EsoUI/Art/Buttons/cancel_over.dds" />
+			  </Button>
+			  
+			  <Control name="$(parent)FilterCombo" inherits="ZO_ComboBox">
+			  <Dimensions x="130" y="25" />
+				<Anchor point="TOPLEFT" relativeTo="$(parent)EditSearch" relativePoint="TOPRIGHT" offsetX="40" offsetY="0" />
+				<!--
+				<Anchor point="BOTTOMRIGHT" relativeTo="$(parent)QualityDownButton" relativePoint="BOTTOMLEFT" offsetX="-40" offsetY="0"/>
+				-->
+				<OnInitialized>
+				  CookeryWiz:OnFilterComboInitialized(self)
+				</OnInitialized> 
+			  </Control>
+				
+			  <Button name="$(parent)QualityDownButton">
+				<Dimensions x="25" y="25" />
+				<Anchor point="TOPLEFT" relativeTo="$(parent)FilterCombo" relativePoint="TOPRIGHT" offsetX="95" offsetY="-2" />
+				<OnInitialized>
+				  CookeryWizQualitySelector:OnQualityDownButtonInitialized(self)
+				</OnInitialized>
+				<OnClicked>
+				  CookeryWizQualitySelector:OnQualityDownButtonClicked(self) 
+				</OnClicked>             
+				<Textures normal="EsoUI/Art/ChatWindow/chat_scrollbar_downArrow_up.dds" pressed="EsoUI/Art/ChatWindow/chat_scrollbar_downArrow_down.dds" mouseOver="EsoUI/Art/ChatWindow/chat_scrollbar_downArrow_over.dds"/>            
+				<Controls><!--
+				  <Texture name="$(parent)Texture" textureFile="EsoUI\\Art\\Miscellaneous\\list_sortdown.dds">
+					<AnchorFill />
+				  </Texture>  
+				  -->
+				</Controls>
+			  </Button>   
+			  
+			  <Backdrop name="$(parent)OutputBackDrop" inherits="ZO_DefaultBackdrop">
+				<!--<Dimensions x="82" y="30" />   -->
+				<Anchor point="TOPLEFT" relativeTo="$(parent)FilterCombo" relativePoint="TOPRIGHT" offsetY="-1" offsetX="14"/>
+				<Anchor point="BOTTOMRIGHT" relativeTo="$(parent)FilterCombo" relativePoint="BOTTOMRIGHT" offsetY="3" offsetX="94"/>
+				<Controls>
+				  <Button name="$(parent)SelectedQuality" inherits="QualityRowTemplate" >
+				  <Anchor point="TOPLEFT" relativeTo="$(parent)OutputBackDrop" relativePoint="TOPLEFT" offsetY="0" offsetX="0"/>
+				  <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)OutputBackDrop" relativePoint="BOTTOMRIGHT" offsetY="0" offsetX="-2"/>              
+				  <OnInitialized>
+					CookeryWizQualitySelector:OnSelectedQualityButtonInitialized(self)
+				  </OnInitialized>
+				  <OnMouseEnter>
+					--d("MouseEnter")
+					CookeryWizQualitySelector:ShowQualityToolTip(self, true)
+				  </OnMouseEnter>              
+				  <OnClicked>
+					--d("OnClicked")
+				  </OnClicked>  
+				  </Button>
+				</Controls>
+			  </Backdrop>  
+			  
+			  <Control name="$(parent)FilterLevel" inherits="ZO_ComboBox">
+			  <Dimensions x="75" y="25" />
+				<Anchor point="TOPLEFT" relativeTo="$(parent)QualityDownButton" relativePoint="TOPRIGHT" offsetX="8" offsetY="0" />
+				<!--
+				<Anchor point="BOTTOMRIGHT" relativeTo="$(parent)QualityDownButton" relativePoint="BOTTOMLEFT" offsetX="-40" offsetY="0"/>
+				-->
+				<OnInitialized>
+				  CookeryWiz:OnFilterLevelComboInitialized(self)
+				</OnInitialized> 
+			  </Control>
+			 
+			 
+			 
+			 </Controls>
+			  </Control>
+			  
+			  <Control name="$(parent)CookContent">
+			  <Dimensions y="25" />
+			  <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)Content" relativePoint="BOTTOMRIGHT" offsetX="-250" offsetY="0"/>
+ 			  <Controls>
+			  
+				<Button name="$(parent)ClearOrdersButton" inheritAlpha="false" text="Clear Orders" inherits="ZO_DefaultButton">
+					<Dimensions x="130" y="25" />
+					<Anchor point="TOPLEFT" relativeTo="$(parent)CookContent" relativePoint="TOPRIGHT" offsetX="0" offsetY="0"/>
+					<OnClicked>
+					  CookeryWiz:OnClearOrdersButtonClicked(self)
+					</OnClicked>                 
+					  
+					<OnInitialized>
+					  CookeryWiz:OnClearOrdersButtonInitialized(self)
+					</OnInitialized>          
+				</Button>   
+			  
+			  
+			  <Button name="$(parent)CookButton" inheritAlpha="false" text="Cook" inherits="ZO_DefaultButton" enabled="false">
+				<Dimensions x="130" y="25" />
+				<Anchor point="TOPLEFT" relativeTo="$(parent)ClearOrdersButton" relativePoint="TOPRIGHT" offsetX="0" offsetY="0" />
+				<OnClicked>
+				  CookeryWiz:OnCookButtonClicked(self)
+				</OnClicked>                 
+				  
+				<OnInitialized>
+				  CookeryWiz:OnCookButtonInitialized(self)
+				</OnInitialized>          
+			  </Button>
+			  
+			  <!--
+			  <Control name="$(parent)QualityCombo" inherits="ZO_ComboBox">
+				<Anchor point="TOPLEFT" relativeTo="$(parent)FilterCombo" relativePoint="TOPRIGHT" offsetX="5" offsetY="0"/>
+				<Anchor point="BOTTOMRIGHT" relativeTo="$(parent)FilterCombo" relativePoint="BOTTOMRIGHT" />               
+				<OnInitialized>
+				  CookeryWiz:OnQualityComboInitialized(self)
+				</OnInitialized> 
+			  </Control>
+			  -->
+			</Controls>
+			</Control>
+			
+		</Controls>
+		</Control>
+		
       </Controls> 
     </TopLevelControl>
   

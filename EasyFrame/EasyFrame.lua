@@ -41,6 +41,10 @@ EasyFrame.easyFrameVariables = {
       height = 400,
       heightMin = 400,
       widthMin = 400,
+	  shrinkWidth=250,
+	  shrinkHeight=290,
+	  shrinkWidthMin=200,
+	  shrinkHeightMin=200,
       isShrunk = false,
       isHidden = false,
       viewState = SHOW_NORMAL
@@ -157,8 +161,17 @@ function EasyFrame:OnEasyFrameResizeStop(control)
     return
   end
   
-  self.easyFrameVariables.width = control:GetWidth()
-  self.easyFrameVariables.height = control:GetHeight()  
+  local vars = self.easyFrameVariables
+  local isShrunk = vars.isShrunk
+  
+  if isShrunk == true then
+  	  vars.shrinkWidth = control:GetWidth()
+	  vars.shrinkHeight = control:GetHeight()  
+  else
+	  vars.width = control:GetWidth()
+	  vars.height = control:GetHeight()  
+  end
+  
   self:OnEasyFrameResize()
 end
 
@@ -178,23 +191,28 @@ function EasyFrame:Shrink()
   
   ui:ClearAnchors()
   ui:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, left, top)
-  
-  if isShrunk then
-    self.ui:SetDimensionConstraints(10, 10) 
-    local wantedWidth, wantedHeight = self.titleLabel:GetDimensions() 
-    --d("Wanted size is "..wantedWidth..","..wantedHeight)
-    local shrinkReloadButtonWidth = self.reloadButton:GetWidth()
-    if (self.reloadButton:IsHidden()) then
-      ui:SetWidth(wantedWidth + 85 - shrinkReloadButtonWidth)
-    else
-      ui:SetWidth(wantedWidth+85)      
-    end
-    ui:SetHeight(23)
-    texture = "/esoui/art/minimap/minimap_maximize_up.dds"
-    self.shrinkButtonTooltip = self.expandTooltip
-    ui:SetResizeHandleSize(0)    
-  else
-    self.ui:SetDimensionConstraints(self.minWidthNormal, self.minHeightNormal) 
+
+	if isShrunk == true then
+	
+		self.ui:SetDimensionConstraints(10, 10) 
+		
+		local wantedWidth = self.titleLabel:GetDimensions()
+		local wantedHeight = 23
+		wantedWidth = wantedWidth + 85
+		
+		if (self.reloadButton:IsHidden()) then
+			wantedWidth = wantedWidth - self.reloadButton:GetWidth()
+		end
+	
+		width = vars.shrinkWidth
+		height = vars.shrinkHeight
+		
+		widthMin = math.max(vars.shrinkWidthMin,wantedWidth)
+		heightMin = math.max(vars.shrinkHeightMin,wantedHeight)
+	else
+		self.ui:SetDimensionConstraints(self.minWidthNormal, self.minHeightNormal) 
+	end
+	
     if width < widthMin then
       width = widthMin
     end
@@ -209,7 +227,11 @@ function EasyFrame:Shrink()
     --texture = "EsoUI/Art/Buttons/cancel_up.dds"
     self.shrinkButtonTooltip = self.shrinkTooltip
     ui:SetResizeHandleSize(self.resizeHandleSize)
-  end
+	
+  --end
+  
+  
+  
   if self.textureShrink then    
     self:SetShrinkButtonTexture(true)
     --self.textureShrink:SetTexture(isShrunk)

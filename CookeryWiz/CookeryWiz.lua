@@ -769,18 +769,27 @@ function CookeryWiz:OnShrink()
   local vars = self.easyFrameVariables
   local isShrunk = vars.isShrunk
   
+  self.recipeScrollList:ClearAnchors()
+  
   if isShrunk then
     -- hide controls
-
+	self.recipeScrollList:SetAnchor(TOPRIGHT,self.contentControl,TOPLEFT,1,2)
   else
     -- show controls
-
+	self.recipeScrollList:SetAnchor(TOPLEFT,self.contentControl,TOPLEFT,1,2)
+	self.recipeScrollList:SetAnchor(BOTTOMLEFT,self.contentControl,BOTTOMLEFT,-4,-36)
   end
 
-  self.contentControl:SetHidden(isShrunk)
-  self.characterComboBox:SetHidden(isShrunk)
-  self.optionsButtonControl:SetHidden(isShrunk)
-  self.mailButtonControl:SetHidden(isShrunk)
+  local controls ={	self.recipeScrollList,
+					self.characterComboBox,
+					self.optionsButtonControl,
+					self.mailButtonControl,
+					self.searchContentControl }
+  
+  for i,control in ipairs(controls) do
+	control:SetHidden(isShrunk)
+  end 
+ 
 end
 
 function CookeryWiz:OnEasyFrameResize()
@@ -1593,6 +1602,10 @@ function CookeryWiz:OnClearOrdersButtonClicked(control)
     self:UpdateCookIngredients()  
 end
 
+function CookeryWiz:OnSearchContentInitialized(control)
+	self.searchContentControl = control 
+end
+
 function CookeryWiz:OnEditSearchInitialized(control)
   self.searchControl = control
   control:SetText(L[CWL_FILTER_TEXT_BLANK])
@@ -1888,6 +1901,20 @@ function CookeryWiz:QualityChanged(currentQuality)
   self:OnReloadRecipes(false)
 end
 
+local function isProvisioningItem(bagId,slotId)
+	local craftType = GetItemCraftingInfo(bagId,slotId)
+	return craftType == CRAFTING_TYPE_PROVISIONING
+end
+
+function CookeryWiz.OnInventorySingleSlotUpdate(eventCode,bagId, slotId, isNewItem, itemSoundCategory, updateReason)
+	if bagId == BAG_WORN and updateReason == INVENTORY_UPDATE_REASON_DEFAULT and isProvisioningItem(bagId,slotId) == true then
+	
+		self = CookeryWiz
+		self:UpdateCookIngredients() 
+		
+	end
+end
+
 function CookeryWiz:RegisterSlashCommands()
   local cookeryWiz = self
   
@@ -1936,7 +1963,7 @@ function CookeryWiz:Initialize()
 
   self.selectedPlayerName = GetUnitName("player")
   self:InitializeEasyFrame(L[CWL_COOKERYWIZ_TITLE], CookeryWizUI) 
-  
+
   CookeryWizMailer:Initialize()
   CookeryWizQualitySelector:Initialize(self, self.QualityChanged)
   self.currentQuality = CookeryWizQualitySelector:GetSelectedQuality()
@@ -1977,6 +2004,7 @@ function CookeryWiz:Initialize()
   
   EVENT_MANAGER:RegisterForEvent(CookeryWiz.name, EVENT_RECIPE_LEARNED, CookeryWiz.OnRecipeLearned)
 
+  EVENT_MANAGER:RegisterForEvent(CookeryWiz.name,EVENT_INVENTORY_SINGLE_SLOT_UPDATE,CookeryWiz.OnInventorySingleSlotUpdate)
 end
 
 function CookeryWiz.OnAddOnLoaded(event, addonName)
