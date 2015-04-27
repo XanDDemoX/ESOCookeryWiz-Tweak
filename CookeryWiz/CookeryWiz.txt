@@ -1,0 +1,22 @@
+## Title: Cookery Wiz Addon
+## Author: kendaron
+## Version 1.0.12
+## Description: This addon is essential for provisioners
+## SavedVariables: CookeryWizSavedVariables
+## DependsOn: EasyFrame
+## APIVersion: 100011
+Lang\en.lua
+Lang\$(language).lua
+CookeryWizOptions.lua
+CookeryWizQualitySelector.lua
+CookeryWizMailer.lua
+MasterRecipeListIngredient.lua
+MasterRecipeListIngredients.lua
+MasterRecipeListEntry.lua
+MasterRecipeList.lua
+CookeryWiz.lua
+Xml\CookeryWizQualitySelector.xml
+Xml\CookeryWiz.xml
+Xml\CookeryWizOptions.xml
+Xml\CookeryWizMailer.xml
+bindings.xml

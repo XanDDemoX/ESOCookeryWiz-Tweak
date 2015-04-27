@@ -1,0 +1,111 @@
+ <GuiXml>
+  <Controls>
+ <TopLevelControl name="CookeryWizMailerUI" tier="MEDIUM" layer="CONTROLS" inherits="EasyFrameUI" hidden="true" resizeHandleSize="0" allowBringToTop="true" >
+      <Dimensions x="350" y="240" />
+      <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPRIGHT" offsetX="-105" offsetY="-5" />
+      <OnShow>
+        CookeryWizMailer:OnMailShow(self)
+        self:BringWindowToTop()
+      </OnShow>
+      <Controls>
+        <Control name="$(parent)Content">
+          <Anchor point="TOPLEFT" relativeTo="$(parent)TitleLabel" relativePoint="BOTTOMLEFT" offsetX="0" offsetY="5" />
+          <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)" relativePoint="BOTTOMRIGHT" offsetX="-5" offsetY="-5"/>
+          <OnInitialized>
+            CookeryWizMailer:OnContentInitialized(self)
+          </OnInitialized>
+          <Controls>
+            <Texture name="$(parent)ContentTexture" textureFile="EsoUI/Art/Miscellaneous/listItem_backdrop.dds">
+              <AnchorFill />
+            </Texture>  
+
+            <Label name="$(parent)DescriptionLabel" font="ZoFontGameShadow" wrapMode="ELLIPSIS" color="INTERFACE_COLOR_TYPE_TEXT_COLORS:INTERFACE_TEXT_COLOR_NORMAL" text="[Description]">
+              <Dimensions x="120" y="25" />
+              <Anchor point="TOPLEFT" relativeTo="$(parent)Content" relativePoint="TOPLEFT" offsetX="0" offsetY="5"/>
+              <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)Content" relativePoint="TOPRIGHT" offsetY="90"/>              
+              <OnInitialized>
+                CookeryWizMailer:OnDescriptionLabelInitialized(self)
+              </OnInitialized>              
+            </Label>
+            
+            <Label name="$(parent)CharacterLabel" font="ZoFontGameShadow" wrapMode="ELLIPSIS" color="INTERFACE_COLOR_TYPE_TEXT_COLORS:INTERFACE_TEXT_COLOR_NORMAL" text="[Description]">
+              <Dimensions x="120" y="30" />
+              <Anchor point="TOPLEFT" relativeTo="$(parent)DescriptionLabel" relativePoint="BOTTOMLEFT" offsetX="0" offsetY="5"/>             
+              <OnInitialized>
+                CookeryWizMailer:OnCharacterLabelInitialized(self)
+              </OnInitialized>              
+            </Label>            
+           
+            <Control name="$(parent)CharacterCombo" inherits="ZO_ComboBox">
+              <Anchor point="TOPLEFT" relativeTo="$(parent)CharacterLabel" relativePoint="TOPRIGHT" offsetX="5" offsetY="0"/>
+              <Anchor point="TOPRIGHT" relativeTo="$(parent)DescriptionLabel" relativePoint="BOTTOMRIGHT" offsetX="-5"/>               
+              <OnInitialized>
+                CookeryWizMailer:OnCharacterComboInitialized(self)
+              </OnInitialized> 
+            </Control> 
+            
+            <Label name="$(parent)AddressLabel" font="ZoFontGameShadow" wrapMode="ELLIPSIS" color="INTERFACE_COLOR_TYPE_TEXT_COLORS:INTERFACE_TEXT_COLOR_NORMAL" text="[Description]"  >
+              <Dimensions x="120" y="30" />
+              <Anchor point="TOPLEFT" relativeTo="$(parent)CharacterLabel" relativePoint="BOTTOMLEFT" offsetX="0" offsetY="5"/>                         
+              <OnInitialized>
+                CookeryWizMailer:OnAddressLabelInitialized(self)
+              </OnInitialized>              
+            </Label>
+            
+            <EditBox name="$(parent)EditAddress" inherits="ZO_DefaultEditForBackdrop"alpha="0.9" color="INTERFACE_COLOR_TYPE_TEXT_COLORS:INTERFACE_TEXT_COLOR_SELECTED" maxInputCharacters="128" >
+              <Anchor point="TOPLEFT" relativeTo="$(parent)AddressLabel" relativePoint="TOPRIGHT" offsetX="5" offsetY="5"/>
+              <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)CharacterCombo" relativePoint="BOTTOMRIGHT" offsetY="35"/>
+              <OnInitialized>
+                CookeryWizMailer:OnEditAddressInitialized(self)
+              </OnInitialized>
+              <OnMouseEnter>
+                --CookeryWizMailer:ShowItemToolTip(self, "Some Text")
+              </OnMouseEnter>
+              <OnMouseExit>
+                --CookeryWiz:ShowItemToolTip(self:GetParent(), false)
+              </OnMouseExit>           
+              <OnFocusGained>
+                CookeryWizMailer:OnEditAddressFocusGained(self)
+              </OnFocusGained> 
+              <OnFocusLost>
+                CookeryWizMailer:OnEditAddressFocusLost(self)
+              </OnFocusLost>             
+              <OnTextChanged>
+                CookeryWizMailer:OnEditAddressChanged(self)
+              </OnTextChanged>
+              <Controls>
+                <Texture name="$(parent)EditTexture" color="6A6A6A">
+                  <AnchorFill />
+                </Texture>          
+              </Controls>
+            </EditBox>
+
+            <Label name="$(parent)StatusLabel" font="ZoFontGameShadow" wrapMode="ELLIPSIS" color="INTERFACE_COLOR_TYPE_TEXT_COLORS:INTERFACE_TEXT_COLOR_NORMAL" text="Sent">
+              <Dimensions x="120" y="25" />
+              <OnInitialized>
+                CookeryWizMailer:OnStatusLabelInitialized(self)
+              </OnInitialized>              
+              <Anchor point="BOTTOMLEFT" relativeTo="$(parent)Content" relativePoint="BOTTOMLEFT" offsetX="5" offsetY="-4" />
+            </Label>
+        
+            <Button name="$(parent)SendButton" inheritAlpha="false" text="[Send]" inherits="ZO_DefaultButton" mouseEnabled="true" tooltipText="[Send]" >
+              <Dimensions x="130" y="25" />
+              <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)Content" relativePoint="BOTTOMRIGHT" offsetX="-5" offsetY="-4"/> 
+           
+              <OnInitialized>
+                CookeryWizMailer:OnSendButtonInitialized(self)                
+              </OnInitialized>
+              <OnClicked>
+                CookeryWizMailer:OnSendButtonClicked(self) 
+              </OnClicked>                     
+            </Button>
+        <!--
+          <TooltipControl name="$(parent)Tooltip">
+          </TooltipControl >
+          -->
+          </Controls>
+        </Control>
+      </Controls>
+    </TopLevelControl>
+  </Controls>
+</GuiXml>    

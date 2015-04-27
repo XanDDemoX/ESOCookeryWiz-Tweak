@@ -1,0 +1,11 @@
+## APIVersion: 100011
+## Author: kendaron
+## Title: Easy Frame Library
+## Description: Used to easily create window frames
+## Version 1.0.3
+## License: Distribution or use without attribtion to author is prohibited!
+## LastUpdated: April 2015
+## SavedVariables: SavedVariables
+
+EasyFrame.lua
+EasyFrame.xml

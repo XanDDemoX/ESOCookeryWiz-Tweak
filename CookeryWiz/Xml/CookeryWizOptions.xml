@@ -1,0 +1,148 @@
+<GuiXml>
+  <Controls>
+   <!-------------------------------------------------------------------------- 
+        CookeryWizOptionsUI: dialog used to configure options
+        NOTE: to initialise properly needs to be below CookeryWizUI
+    ---------------------------------------------------------------------------->
+
+    <TopLevelControl name="CookeryWizOptionsUI" tier="MEDIUM" layer="CONTROLS" inherits="EasyFrameUI" hidden="true" resizeHandleSize="0" allowBringToTop="true" >
+      <Dimensions x="400" y="300" />
+      <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPRIGHT" offsetX="-105" offsetY="-5" />
+      <OnInitialized>
+        CookeryWizOptions:OnCookeryWizOptionsInitialized(self)
+      </OnInitialized>      
+      <Controls> 
+        <Label name="$(parent)TitleLabel" override="true" color="FF00FF">      
+        </Label>
+        <Control name="$(parent)Content">
+          <Anchor point="TOPLEFT" relativeTo="$(parent)TitleLabel" relativePoint="BOTTOMLEFT" offsetX="0" offsetY="5" />
+          <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)" relativePoint="BOTTOMRIGHT" offsetX="-5" offsetY="-5"/>
+          <OnInitialized>
+            CookeryWizOptions:OnContentControlInitialized(self)
+          </OnInitialized>
+          <Controls>
+            <Texture name="$(parent)ContentTexture" textureFile="EsoUI/Art/Miscellaneous/listItem_backdrop.dds">
+              <AnchorFill />
+            </Texture>  
+
+            <Line name="$(parent)GeneralLine" thickness="10" textureFile="/esoui/art/miscellaneous/wide_divider_left.dds">
+              <Anchor point="TOPLEFT" relativeTo="$(parent)Content" relativePoint="TOPLEFT" offsetX="0" offsetY="30"/>
+              <Anchor point="TOPRIGHT" relativeTo="$(parent)Content" relativePoint="TOPRIGHT" offsetX="0" offsetY="30" />
+            </Line>
+            
+            <Label name="$(parent)GeneralLabel" horizontalAlignment="RIGHT" font="ZoFontWinH2" wrapMode="ELLIPSIS" color="INTERFACE_COLOR_TYPE_TEXT_COLORS:INTERFACE_TEXT_COLOR_HIGHLIGHT" text="[Description]">
+              <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)GeneralLine" relativePoint="TOPRIGHT" offsetX="0" offsetY="-5"/>
+              <!--<Anchor point="TOPRIGHT" relativeTo="$(parent)LineGeneral" relativePoint="TOPRIGHT" offsetX="0" offsetY="5"/>              -->
+              <OnInitialized>
+                CookeryWizOptions:OnGeneralOptionsLabelInitialized(self)
+              </OnInitialized>              
+            </Label>
+            
+            <Line name="$(parent)AccountLine" thickness="10" textureFile="/esoui/art/miscellaneous/wide_divider_left.dds">
+              <Anchor point="TOPLEFT" relativeTo="$(parent)GeneralLine" relativePoint="BOTTOMLEFT" offsetX="0" offsetY="80"/>
+              <Anchor point="TOPRIGHT" relativeTo="$(parent)GeneralLine" relativePoint="BOTTOMRIGHT" offsetX="0" offsetY="80"/>
+            </Line>
+            
+            <Label name="$(parent)AccountLabel" horizontalAlignment="RIGHT" font="ZoFontWinH2" wrapMode="ELLIPSIS" color="INTERFACE_COLOR_TYPE_TEXT_COLORS:INTERFACE_TEXT_COLOR_NORMAL" text="[Description]">
+              <!--<Anchor point="TOPLEFT" relativeTo="$(parent)LineGeneral" relativePoint="BOTTOMLEFT" offsetX="0" offsetY="10"/>-->
+              <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)AccountLine" relativePoint="TOPRIGHT" offsetX="0" offsetY="-5"/>              
+              <OnInitialized>
+                CookeryWizOptions:OnAccountOptionsLabelInitialized(self)
+              </OnInitialized>              
+            </Label>            
+            
+            <Line name="$(parent)ImportedLine" thickness="10" textureFile="/esoui/art/miscellaneous/wide_divider_left.dds">
+              <Anchor point="TOPLEFT" relativeTo="$(parent)AccountLine" relativePoint="BOTTOMLEFT" offsetX="0" offsetY="90"/>
+              <Anchor point="TOPRIGHT" relativeTo="$(parent)AccountLine" relativePoint="BOTTOMRIGHT" offsetX="0" offsetY="90"/>
+            </Line>
+            
+            <Label name="$(parent)ImportedLabel" horizontalAlignment="RIGHT" font="ZoFontWinH2" wrapMode="ELLIPSIS" color="INTERFACE_COLOR_TYPE_TEXT_COLORS:INTERFACE_TEXT_COLOR_NORMAL" text="[Description]">
+              <!--<Anchor point="TOPLEFT" relativeTo="$(parent)CharacterLabel" relativePoint="BOTTOMLEFT" offsetX="0" offsetY="20"/>-->
+              <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)ImportedLine" relativePoint="TOPRIGHT" offsetX="0" offsetY="-5"/>              
+              <OnInitialized>
+                CookeryWizOptions:OnExternalOptionsLabelInitialized(self)
+              </OnInitialized>              
+            </Label>
+            
+            <Label name="$(parent)DisableShrinkText" font="ZoFontGame" color="INTERFACE_COLOR_TYPE_TEXT_COLORS:INTERFACE_TEXT_COLOR_NORMAL" text="only" resizeToFitDescendents="1">
+              <Anchor point="TOPRIGHT" relativeTo="$(parent)GeneralLine" relativePoint="TOPRIGHT" offsetX="2" offsetY="15" />
+              <OnInitialized>
+                CookeryWizOptions:OnDisableShrinkLabelInitialized(self)
+              </OnInitialized>               
+            </Label>
+            
+            <Button name="$(parent)DisableShrinkCheckButton" inherits="ZO_CheckButton" text="only">
+              <Dimensions x="26" y="26" />
+              <Anchor point="TOPRIGHT" relativeTo="$(parent)DisableShrinkText" relativePoint="TOPLEFT" offsetX="-5"/>
+              <OnInitialized>
+                CookeryWizOptions:OnDisableShrinkCheckButtonInitialized(self)
+              </OnInitialized> 
+
+              <OnClicked>
+                CookeryWizOptions:OnDisableShrinkCheckButtonClicked(...)
+              </OnClicked>
+
+            </Button>
+
+            <Label name="$(parent)CharacterLabel" font="ZoFontGameShadow" wrapMode="ELLIPSIS" color="INTERFACE_COLOR_TYPE_TEXT_COLORS:INTERFACE_TEXT_COLOR_NORMAL" text="[Description]">
+              <Dimensions y="30" />
+              <Anchor point="TOPLEFT" relativeTo="$(parent)AccountLine" relativePoint="BOTTOMLEFT" offsetX="0" offsetY="15"/>             
+              <OnInitialized>
+                CookeryWizOptions:OnCharacterLabelInitialized(self)
+              </OnInitialized>              
+            </Label>            
+           
+            <Control name="$(parent)CharacterCombo" inherits="ZO_ComboBox">
+              <Anchor point="TOPLEFT" relativeTo="$(parent)CharacterLabel" relativePoint="TOPRIGHT" offsetX="15" offsetY="0"/>
+              <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)CharacterLabel" relativePoint="BOTTOMRIGHT" offsetX="180" offsetY="0"/> 
+              <OnInitialized>
+                CookeryWizOptions:OnCharacterComboInitialized(self)
+              </OnInitialized> 
+            </Control> 
+            <Button name="$(parent)CharacterDisabledButton" text="[Disable]" inherits="ZO_DefaultButton" >
+              <Dimensions x="120" y="30" />
+              <Anchor point="TOPRIGHT" relativeTo="$(parent)AccountLine" relativePoint="TOPRIGHT" offsetX="0" offsetY="15"/>
+              <OnInitialized>
+                CookeryWizOptions:OnCharacterDisabledButtonInitialized(self)
+              </OnInitialized>
+              <OnClicked>
+                CookeryWizOptions:OnCharacterDisabledButtonClicked(self)
+              </OnClicked>               
+            </Button>             
+         
+            
+            <Label name="$(parent)ImportedCharacterLabel" font="ZoFontGameShadow" wrapMode="ELLIPSIS" color="INTERFACE_COLOR_TYPE_TEXT_COLORS:INTERFACE_TEXT_COLOR_NORMAL" text="[Description]">
+              <Dimensions y="30" />
+              <Anchor point="TOPLEFT" relativeTo="$(parent)ImportedLine" relativePoint="BOTTOMLEFT" offsetX="0" offsetY="15"/>
+              <OnInitialized>
+                CookeryWizOptions:OnImportedCharacterLabelInitialized(self)
+              </OnInitialized>              
+            </Label> 
+            
+            <Control name="$(parent)ImportedCharacterCombo" inherits="ZO_ComboBox">
+              <Anchor point="TOPLEFT" relativeTo="$(parent)ImportedCharacterLabel" relativePoint="TOPRIGHT" offsetX="15" offsetY="0"/>
+              <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)ImportedCharacterLabel" relativePoint="BOTTOMRIGHT" offsetX="180" offsetY="0"/>  
+              <OnInitialized>
+                CookeryWizOptions:OnImportedCharacterComboInitialized(self)
+              </OnInitialized> 
+            </Control> 
+
+            <Button name="$(parent)DeleteExternalCharacterButton" text="[Delete]" inherits="ZO_DefaultButton" >
+              <Dimensions x="120" y="30" />
+              <Anchor point="TOPRIGHT" relativeTo="$(parent)ImportedLine" relativePoint="TOPRIGHT" offsetX="0" offsetY="15"/>
+              <OnInitialized>
+                CookeryWizOptions:OnDeleteExternalCharacterButtonInitialized(self)
+              </OnInitialized>              
+              <OnClicked>
+                CookeryWizOptions:OnDeleteExternalCharacterButtonClicked(self)
+              </OnClicked>                 
+            </Button>           
+
+          </Controls>
+        </Control>
+
+      </Controls>
+
+    </TopLevelControl>
+  </Controls>
+</GuiXml>     

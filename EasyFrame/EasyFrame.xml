@@ -1,0 +1,55 @@
+<GuiXml>
+  <Controls>   
+    <Control name="EasyFrameUI" tier="MEDIUM" mouseEnabled="true" movable="true" clampedToScreen="true" resizeHandleSize="5" virtual="true">
+      <Anchor point="BOTTOM" relativeTo="GuiRoot" relativePoint="CENTER" offsetY="-10" /> 
+      <Controls>
+        <Backdrop name="$(parent)BG" inherits="ZO_DefaultBackdrop" />
+        <Label name="$(parent)TitleLabel" height="15" font="ZoFontGame" inheritAlpha="true" color="FF0000"
+            wrapMode="TRUNCATE" verticalAlignment="TOP" horizontalAlignment="LEFT" text="EasyFrame">
+          <Anchor point="TOPLEFT" offsetX="4"/> 
+          <Controls>
+          <!--
+            <Texture name="$(parent)TextureTitleLabel" color="FF00FF">
+              <AnchorFill />
+            </Texture>
+            -->
+          </Controls>           
+        </Label>
+               
+        <Button name="$(parent)CloseButton" inherits="ZO_CloseButton">
+					<Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPRIGHT" offsetX="-25" />                    
+				</Button>       
+       
+        <Button name="$(parent)ShrinkButton">
+          <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPRIGHT" offsetX="-50" />
+          <Dimensions x="20" y="20" />
+          <Controls>          
+            <Texture name="$(parent)TextureShrink" textureFile="esoui/art/chatwindow/minimize_up.dds">
+              <AnchorFill />
+            </Texture>
+          <!--
+            <Texture name="$(parent)TextureShrink" textureFile="/esoui/art/minimap/minimap_minimize_up.dds">
+              <AnchorFill />
+            </Texture>
+            -->
+          </Controls>       
+        </Button>
+        
+        <Button name="$(parent)ReloadButton">
+          <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPRIGHT" offsetX="-75" />
+          <Dimensions x="20" y="20" />
+          <!--
+          <Textures normal="esoui/art/chatwindow/chat_options_up.dds" pressed="esoui/art/chatwindow/chat_options_down.dds"
+						mouseOver="esoui/art/chatwindow/chat_options_over.dds" />
+            -->
+          <Controls>
+            <Texture name="$(parent)TextureReloadRecipes" textureFile="/esoui/art/ava/ava_keepstatus_icon_collectionrate.dds">
+              <AnchorFill />
+            </Texture>
+          </Controls>         
+        </Button>
+        </Controls>
+    </Control>
+  
+  </Controls>
+</GuiXml>  
