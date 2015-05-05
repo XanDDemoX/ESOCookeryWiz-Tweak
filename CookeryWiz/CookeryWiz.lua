@@ -1261,11 +1261,11 @@ function CookeryWiz:GetIngredientEntry(name)
 end
 
 function CookeryWiz:UpdateCookIngredients()
-  
+
   if self.disableIngredientUpdate then
     return
   end
-  
+
   local cookVars = self.savedVariables.cook
   local cook = nil
    
@@ -1274,6 +1274,7 @@ function CookeryWiz:UpdateCookIngredients()
     trace("No listControl specified")
     return
   end
+
 	local scrollData = ZO_ScrollList_GetDataList(listControl)
   self.ingredients = scrollData
 	ZO_ScrollList_Clear(listControl)
@@ -1901,14 +1902,14 @@ function CookeryWiz:QualityChanged(currentQuality)
   self:OnReloadRecipes(false)
 end
 
-local function isProvisioningItem(bagId,slotId)
+local function isProvisioningOrDestroyedItem(bagId,slotId,isNewItem)
 	local craftType = GetItemCraftingInfo(bagId,slotId)
-	return craftType == CRAFTING_TYPE_PROVISIONING
+	return craftType == CRAFTING_TYPE_PROVISIONING or (isNewItem == false and craftType == CRAFTING_TYPE_INVALID)
 end
 
 function CookeryWiz.OnInventorySingleSlotUpdate(eventCode,bagId, slotId, isNewItem, itemSoundCategory, updateReason)
-	if bagId == BAG_WORN and updateReason == INVENTORY_UPDATE_REASON_DEFAULT and isProvisioningItem(bagId,slotId) == true then
-	
+	if (bagId == BAG_WORN or bagId == BAG_BACKPACK) and updateReason == INVENTORY_UPDATE_REASON_DEFAULT and isProvisioningOrDestroyedItem(bagId,slotId,isNewItem) == true then
+
 		self = CookeryWiz
 		self:UpdateCookIngredients() 
 		
